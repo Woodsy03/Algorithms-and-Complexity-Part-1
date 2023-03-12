@@ -1,8 +1,8 @@
 ﻿namespace SortAndSearch
 {
-    class DataImport
+    public class DataImport
     {
-        public DataImport(string Road_1_256)
+        public DataImport()
         {
             string[] Road_1_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_1_256.txt");
             string[] Road_2_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_2_256.txt");
@@ -12,7 +12,7 @@
     }
     class BubbleSort
     {
-        static void Main()
+        static void Main(string[] Road_1_256)
         {
             string ValidPath = "false";
 
@@ -29,6 +29,13 @@
                 {
                     Console.WriteLine("That isn't a valid option, please try again.");
                 }
+            if (ChosenPath is "1")
+            {
+                    string[] List = Road_1_256;
+                    
+            }
+
+
             }
       
         
