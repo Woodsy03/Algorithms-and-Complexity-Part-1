@@ -1,5 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace SortAndSearch
 {
@@ -40,10 +44,28 @@ namespace SortAndSearch
     
     public class BubbleSort
         {
-            public static void Sorting(string[] ArrayList) 
+            public static void Sorting(string[] IntList)
             { 
             
+                int length = IntList.Length;
+                for (int x = 0; x < length; x++)
+                {
+                    for (int y = 0; y < length - x; y++)
+                    {
+                        if (IntList[x] > IntList[y+1])
+                        {
+                            int cache = IntList[x];
+                            IntList[x] = IntList[y];
+                            IntList[y] = cache;
 
+
+                        }
+
+
+                    }
+
+
+                }
 
             }
 
@@ -57,6 +79,7 @@ namespace SortAndSearch
         {
             Console.WriteLine("Test");
             string[] ArrayList = ChooseFile();
+            int[] IntList = Array.ConvertAll(ArrayList, int.parse);
 
          
 
