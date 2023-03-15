@@ -79,7 +79,7 @@ namespace SortAndSearch
         {
             Console.WriteLine("Test");
             string[] ArrayList = ChooseFile();
-            int[] IntList = Array.ConvertAll(ArrayList, int.parse);
+            int[] IntList = Array.ConvertAll(ArrayList, int.Parse);
 
          
 
