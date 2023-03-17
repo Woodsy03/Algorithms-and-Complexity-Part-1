@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace SortAndSearch
 {
     public class SortAlgorithm
     {
-        public static string[] ChooseFile()
+        private static string[] ChooseFile()
         {
             string[] Road_1_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_1_256.txt");
             string[] Road_2_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_2_256.txt");
@@ -60,13 +62,31 @@ namespace SortAndSearch
 
     public class SearchAlgorithm
         {
-            public static string UserInputSearch(int[] IntList, string UserInput)
+            public static int BinarySearch(int[] IntList, int UserInput)
             {
                 Console.WriteLine("We are searching for the string " + UserInput);
+                int max = IntList.Length;
+                int min = 0;
+                while (min < max)
+                {
+                    int midpoint = (max + min) / 2;
+                    Console.WriteLine("midpoint is " + midpoint + " and the value is " + IntList[midpoint]);
+                    if (UserInput == IntList[midpoint])
+                    {
+                        return midpoint;
+                    }
+                    else if (IntList[midpoint] < UserInput)
+                    {
+                        min = midpoint - 1;
+                    }
+                    else if (IntList[midpoint] > UserInput)
+                    {
+                        max = midpoint;
+                    }
 
+                }
+                return -1;
             }
-
-
         }
 
 
@@ -76,18 +96,31 @@ namespace SortAndSearch
             int[] IntList = BubbleSort(ArrayList);
 
             // Use the sorted array as needed
+            int i = 0;
             foreach (int x in IntList)
             {
-                if (x %10 == 0)
+                i = i + 1;
+                if (i %10 == 0)
                 {
-                    Console.WriteLine(x);
+                    Console.WriteLine("line " + i + " has the number "+ (x+1)); //x+1 is used to offset the index starting at 0
+
                 }
                 
             }
 
             Console.WriteLine("Which entry would you like to search for?");
-            string UserInput = Console.ReadLine();
-            string ReturnedPhrase = UserInputSearch(IntList, UserInput);
+            int UserInput = int.Parse(Console.ReadLine());
+            int ReturnedPhrase = SearchAlgorithm.BinarySearch(IntList, UserInput);
+            Console.WriteLine("returned phrase is " + ReturnedPhrase);
+            if (ReturnedPhrase == -1)
+            {
+                Console.WriteLine("The entry " + UserInput + " could not be found in this list");
+            }
+            else
+            {
+                Console.WriteLine("The entry " + UserInput + " was found on line " + ReturnedPhrase);
+            }
+
         }
     }
 }
