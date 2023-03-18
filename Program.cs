@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SortAndSearch
 {
@@ -67,7 +69,7 @@ namespace SortAndSearch
                 Console.WriteLine("We are searching for the string " + UserInput);
                 int max = IntList.Length;
                 int min = 0;
-                while (min < max)
+                while (min <= max)
                 {
                     int midpoint = (max + min) / 2;
                     Console.WriteLine("midpoint is " + midpoint + " and the value is " + IntList[midpoint]);
@@ -75,16 +77,16 @@ namespace SortAndSearch
                     {
                         return midpoint;
                     }
-                    else if (IntList[midpoint] < UserInput)
+                    if (IntList[midpoint] < UserInput)
                     {
-                        min = midpoint - 1;
+                        min = midpoint +1;
                     }
-                    else if (IntList[midpoint] > UserInput)
+                    if (IntList[midpoint] > UserInput)
                     {
-                        max = midpoint;
+                        max = midpoint - 1;
                     }
-
                 }
+                
                 return -1;
             }
         }
@@ -95,17 +97,33 @@ namespace SortAndSearch
             string[] ArrayList = ChooseFile();
             int[] IntList = BubbleSort(ArrayList);
 
+            int[] DescendngIntList = IntList;
+            Array.Reverse(DescendngIntList);
             // Use the sorted array as needed
             int i = 0;
+            Console.WriteLine("this is displaying every 10th line from the ascending order list");
             foreach (int x in IntList)
             {
                 i = i + 1;
                 if (i %10 == 0)
                 {
-                    Console.WriteLine("line " + i + " has the number "+ (x+1)); //x+1 is used to offset the index starting at 0
+                    Console.WriteLine("line " + i + " has the number "+ (x)); //x+1 is used to offset the index starting at 0
 
                 }
                 
+            }
+
+            i = 0;
+            Console.WriteLine("this is displaying every 10th line from the descending order list");
+            foreach (int x in DescendngIntList)
+            {
+                i = i + 1;
+                if (i % 10 == 0)
+                {
+                    Console.WriteLine("line " + i + " has the number " + (x)); //x+1 is used to offset the index starting at 0
+
+                }
+
             }
 
             Console.WriteLine("Which entry would you like to search for?");
