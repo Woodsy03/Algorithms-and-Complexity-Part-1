@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
@@ -11,13 +12,22 @@ namespace SortAndSearch
     {
         private static string[] ChooseFile()
         {
+            string[] Road_1_256 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_1_256.txt").Split('\n');
+            string[] Road_2_256 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_2_256.txt").Split('\n');
+            string[] Road_3_256 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_3_256.txt").Split('\n');
+            string[] Road_1_2048 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_1_2048.txt").Split('\n');
+            string[] Road_2_2048 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_2_2048.txt").Split('\n');
+            string[] Road_3_2048 = new WebClient().DownloadString("https://raw.githubusercontent.com/Woodsy03/Algorithms-and-Complexity-Part-1/master/Road_3_2048.txt").Split('\n');
+
+            /*
+            This code was the initial local solution but I opted for a direct download as that allows data hot swapping and allows the same files to be pulled from multiple machines simultaniously (which a local data file can't do)
             string[] Road_1_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_1_256.txt");
             string[] Road_2_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_2_256.txt");
             string[] Road_3_256 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_3_256.txt");
             string[] Road_1_2048 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_1_2048.txt");
             string[] Road_2_2048 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_2_2048.txt");
             string[] Road_3_2048 = File.ReadAllLines("C:\\Users\\xbox2\\Desktop\\Uni Work\\Year 1\\Problem Solving\\Road_3_2048.txt");
-
+            */
 
             while (true)
             {
