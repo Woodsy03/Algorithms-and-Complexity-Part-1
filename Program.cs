@@ -104,35 +104,35 @@ namespace SortAndSearch
             {
                 Console.WriteLine("We are searching for the string " + UserInput);
                 int max = IntList.Length;
-                int midpoint = 0;
+                int[] midpoint = new int[] {0};
                 int min = 0;
                 while (min <= max)
                 {
-                    midpoint = (max + min) / 2;
+                    midpoint[0] = (max + min) / 2;
                     //Console.WriteLine("midpoint is " + midpoint + " and the value is " + IntList[midpoint]);
                     if (max < UserInput)
                     {
                         Console.WriteLine("The provided search query was too high to be in this list.");
-                        midpoint = 0;
-                        return midpoint;
+                        midpoint[0] = 0;
+                        return midpoint[0];
 
                     }
-                    else if (UserInput == IntList[midpoint])
+                    else if (UserInput == IntList[midpoint[0]])
                     {
-                        return midpoint;
+                        return midpoint[0];
                     }
-                    else if (IntList[midpoint] < UserInput)
+                    else if (IntList[midpoint[0]] < UserInput)
                     {
-                        min = midpoint +1;
+                        min = midpoint[0] +1;
                     }
-                    else if (IntList[midpoint] > UserInput)
+                    else if (IntList[midpoint[0]] > UserInput)
                     {
-                        max = midpoint - 1;
+                        max = midpoint[0] - 1;
                     }
                 }
 
-                midpoint = midpoint * -1;
-                return midpoint;
+                midpoint[0] = midpoint[0] * -1;
+                return midpoint[0];
             }
         }
 
@@ -184,9 +184,10 @@ namespace SortAndSearch
             Console.WriteLine("Which entry would you like to search for?");
             Array.Reverse(IntList);
             int UserInput = int.Parse(Console.ReadLine());
-            int ReturnedPhrase = SearchAlgorithm.BinarySearch(IntList, UserInput);
-            int FlippedPhrase = Math.Abs(ReturnedPhrase);
-            if (ReturnedPhrase <= -1)
+            int[] ReturnedPhrase = SearchAlgorithm.BinarySearch(IntList, UserInput);
+            int indicator = ReturnedPhrase[0];
+            int[] FlippedPhrase = Math.Abs(ReturnedPhrase);
+            if (indicator <= -1)
             {
                 ReturnedPhrase = Math.Abs(ReturnedPhrase);
                 Console.WriteLine("The entry " + UserInput + " could not be found in this list. The closest value was on line " + FlippedPhrase);
