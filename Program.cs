@@ -119,7 +119,12 @@ namespace SortAndSearch
                     }
                     else if (UserInput == IntList[midpoint[0]])
                     {
-                        return midpoint[0];
+                        List<int> Lines = new List<int>() { midpoint[0] };
+                        while (midpoint[0] > 0 && midpoint[0] < IntList.Length - 1 && (IntList[midpoint[0] + 1] == UserInput || IntList[midpoint[0] - 1] == UserInput))
+                        {
+                            Lines.Add(midpoint[0]);
+                        }
+                        return Lines[0];
                     }
                     else if (IntList[midpoint[0]] < UserInput)
                     {
@@ -132,7 +137,8 @@ namespace SortAndSearch
                 }
 
                 midpoint[0] = midpoint[0] * -1;
-                return midpoint[0];
+                List<int> Line = new List<int>() { midpoint[0] };
+                return Line[0];
             }
         }
 
@@ -184,13 +190,12 @@ namespace SortAndSearch
             Console.WriteLine("Which entry would you like to search for?");
             Array.Reverse(IntList);
             int UserInput = int.Parse(Console.ReadLine());
-            int[] ReturnedPhrase = SearchAlgorithm.BinarySearch(IntList, UserInput);
-            int indicator = ReturnedPhrase[0];
-            int[] FlippedPhrase = Math.Abs(ReturnedPhrase);
-            if (indicator <= -1)
+            int ReturnedPhrase = SearchAlgorithm.BinarySearch(IntList, UserInput);
+            int FlippedPhrase = Math.Abs(ReturnedPhrase);
+            if (ReturnedPhrase <= -1)
             {
                 ReturnedPhrase = Math.Abs(ReturnedPhrase);
-                Console.WriteLine("The entry " + UserInput + " could not be found in this list. The closest value was on line " + FlippedPhrase);
+                Console.WriteLine("The entry " + UserInput + " could not be found in this list. The closest value was on the lines " + FlippedPhrase);
             }
             else
             {
